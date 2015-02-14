@@ -33,7 +33,7 @@ public class Game extends BasicGame
 
 	@Override
 	public void init(GameContainer gc) throws SlickException {
-		player = new Player(400,320,"img/sprite1.png");
+		player = new Player(400,320,"img/sprite2.png");
 		
 	}
 
