@@ -41,32 +41,7 @@ public class Game extends BasicGame
 	public void update(GameContainer gc, int i) throws SlickException {
 		
 		Input input = gc.getInput();
-		/*
-		if(input.isKeyDown(Input.KEY_UP) && input.isKeyDown(Input.KEY_LEFT)){
-	        	
-			player.ypos -= 1;
-	        player.xpos -= 1;
-	        	
-	    }
-	    else if(input.isKeyDown(Input.KEY_UP) && input.isKeyDown(Input.KEY_RIGHT)){
-	        	
-	        player.ypos -= 1;
-	        player.xpos += 1;
-	        	
-	    }
-	    else if(input.isKeyDown(Input.KEY_DOWN) && input.isKeyDown(Input.KEY_LEFT)){
-	        	
-	        player.ypos += 1;
-	        player.xpos -= 1;
-	        	
-	    }
-	    else if(input.isKeyDown(Input.KEY_DOWN) && input.isKeyDown(Input.KEY_RIGHT)){
-	        	
-	        player.ypos += 1;
-	        player.xpos += 1;
-	        	
-	    }
-	    */
+		
 	    if (input.isKeyDown(Input.KEY_UP)){
         	
         	player.ypos -= 2;

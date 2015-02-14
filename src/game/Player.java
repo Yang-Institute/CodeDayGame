@@ -7,6 +7,7 @@ public class Player {
 	
 	public int xpos;
 	public int ypos;
+	public int health;
 	public Image img;
 
 	
@@ -15,13 +16,13 @@ public class Player {
 		xpos = x;
 		ypos = y;
 		img = new Image(i);
+		health = 100;
 		
 	}
 	
 	public void shoot() throws SlickException {
 		Bullet bullet = new Bullet(xpos, ypos);
-	while (true) {	bullet.move();
+		bullet.move();
 		bullet.image.draw(bullet.x,bullet.y);
-	}
 	}
 }
