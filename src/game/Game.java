@@ -21,7 +21,7 @@ import org.newdawn.slick.command.MouseButtonControl;
 import org.newdawn.slick.particles.ParticleSystem;
 import org.omg.CORBA.BAD_POLICY_VALUE;
 
-public class Game extends BasicGame {
+public class Game extends BasicGame implements InputProviderListener  {
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 540;
 	public static final int FPS = 60;
@@ -30,7 +30,8 @@ public class Game extends BasicGame {
 	Player player;
 	
 	private Command shoot = new BasicCommand("shoot");
-
+	
+	private InputProvider provider;	
 	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
 	public Game(String gamename) {
@@ -40,32 +41,54 @@ public class Game extends BasicGame {
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		player = new Player(400, 320, "img/psprite1.png", "img/bullet2.png");
+		
+		provider = new InputProvider(gc.getInput());
+        provider.addListener(this);
+        provider.bindCommand(new MouseButtonControl(0), shoot);
 	
+	}
+	
+	@Override
+	public void controlPressed(Command c) {
+		
+		if (c.equals(shoot)){
+			try {
+				bullets.add(player.shoot());
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	@Override
+	public void controlReleased(Command c) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void update(GameContainer gc, int i) throws SlickException {
 
 		Input input = gc.getInput();
-		if (input.isKeyDown(Input.KEY_X)) {
-			bullets.add(player.shoot());
-		}
-		if (input.isKeyDown(Input.KEY_UP)) {
+		
+		if (input.isKeyDown(Input.KEY_W)) {
 
 			player.pos.y -= 2;
 
 		}
-		if (input.isKeyDown(Input.KEY_DOWN)) {
+		if (input.isKeyDown(Input.KEY_S)) {
 
 			player.pos.y += 2;
 
 		}
-		if (input.isKeyDown(Input.KEY_LEFT)) {
+		if (input.isKeyDown(Input.KEY_A)) {
 
 			player.pos.x -= 2;
 
 		}
-		if (input.isKeyDown(Input.KEY_RIGHT)) {
+		if (input.isKeyDown(Input.KEY_D)) {
 
 			player.pos.x += 2;
 
@@ -111,4 +134,6 @@ public class Game extends BasicGame {
 			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
+
+
 }

@@ -9,7 +9,7 @@ public class Player {
 	public int health;
 	public Image img;
 	public Image bulletImg;
-	public Vector bvel = new Vector(0,0);
+	public Vector bvel = new Vector(0,-10);
 	
 	public Player(int xx, int yy, String i, String b) throws SlickException{
 		
@@ -23,7 +23,7 @@ public class Player {
 	}
 	
 	public Bullet shoot() throws SlickException{
-		return new Bullet(pos.x + 24, pos.y + 5,bvel.x,bvel.y,bulletImg);
+		return new Bullet(pos.x + 24, pos.y,bvel.x,bvel.y,bulletImg);
 		
 	}
 	
