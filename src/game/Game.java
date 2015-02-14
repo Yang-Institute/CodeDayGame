@@ -1,7 +1,9 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -16,6 +18,8 @@ import org.newdawn.slick.command.InputProvider;
 import org.newdawn.slick.command.InputProviderListener;
 import org.newdawn.slick.command.KeyControl;
 import org.newdawn.slick.command.MouseButtonControl;
+import org.newdawn.slick.particles.ParticleSystem;
+import org.omg.CORBA.BAD_POLICY_VALUE;
 
 public class Game extends BasicGame
 {
@@ -26,6 +30,8 @@ public class Game extends BasicGame
 	
     Player player;
     
+    public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+    
 	public Game(String gamename)
 	{
 		super(gamename);
@@ -33,7 +39,8 @@ public class Game extends BasicGame
 
 	@Override
 	public void init(GameContainer gc) throws SlickException {
-		player = new Player(400,320,"img/psprite1.png");
+		player = new Player(400,320,"img/psprite1.png", "img/bullet.png");
+		
 		
 	}
 
@@ -41,25 +48,27 @@ public class Game extends BasicGame
 	public void update(GameContainer gc, int i) throws SlickException {
 		
 		Input input = gc.getInput();
-		
+		if (input.isKeyDown(Input.KEY_X)){
+			bullets.add(player.shoot());
+		}
 	    if (input.isKeyDown(Input.KEY_UP)){
         	
-        	player.ypos -= 2;
+        	player.pos.y -= 2;
         	
         }
         if (input.isKeyDown(Input.KEY_DOWN)){
         	
-            player.ypos += 2;
+            player.pos.y += 2;
             
         }
         if (input.isKeyDown(Input.KEY_LEFT)){
         	
-            player.xpos -= 2;
+            player.pos.x -= 2;
             
         }
         if (input.isKeyDown(Input.KEY_RIGHT)){
         	
-            player.xpos += 2;
+            player.pos.x += 2;
             
         }
       
@@ -70,7 +79,14 @@ public class Game extends BasicGame
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
-		player.img.draw(player.xpos,player.ypos);
+		player.img.draw(player.pos.x,player.pos.y);
+		
+		for (Bullet b: bullets){
+			b.img.draw(b.pos.x,b.pos.y);
+			b.pos.x += b.vel.x;
+			b.pos.y += b.vel.y;
+			
+		}
 		//g.drawString("Hello World", 50, 50);
 	}
 

@@ -5,24 +5,27 @@ import org.newdawn.slick.SlickException;
 
 public class Player {
 	
-	public int xpos;
-	public int ypos;
+	public Vector pos = new Vector(0,0);
 	public int health;
 	public Image img;
-
+	public Image bulletImg;
+	public Vector bvel = new Vector(0,-1);
 	
-	public Player(int x, int y, String i) throws SlickException{
+	public Player(int xx, int yy, String i, String b) throws SlickException{
 		
-		xpos = x;
-		ypos = y;
+		pos.x = xx;
+		pos.y = yy;
 		img = new Image(i);
+		bulletImg = new Image(b);
 		health = 100;
 		
+		
 	}
 	
-	public void shoot() throws SlickException {
-		Bullet bullet = new Bullet(xpos, ypos);
-		bullet.move();
-		bullet.image.draw(bullet.x,bullet.y);
+	public Bullet shoot() throws SlickException{
+		return new Bullet(pos,bvel,bulletImg);
+		
 	}
+	
+
 }

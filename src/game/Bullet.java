@@ -2,33 +2,28 @@ package game;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.particles.Particle;
-import org.newdawn.slick.particles.ParticleSystem;
 
-public class Bullet extends Particle {
-//	private int damage;
-
-	protected float velx;
-	protected float vely;
-	protected float x;
-	protected float y;
-	protected Image image;
+public class Bullet {
 	
-	public Bullet(int xPlace, int yPlace) throws SlickException{
-		super(new ExistingBullets());
-		velx = 0;
-		vely = 15;
-		x = xPlace;
-		y = yPlace;
-		image = new Image("img/bullet.png");
+	public Vector pos = new Vector(0,0);
+	public Vector vel = new Vector(0,0);
+	public Image img;
+	
+	
+	public Bullet(int xx,int yy,int xxx,int yyy, String s) throws SlickException{
+		
+		pos.x = xx;
+		pos.y = yy;
+		vel.x = xxx;
+		vel.y = yyy;
+		img = new Image(s);
+		
 	}
 	
-	public Bullet(ExistingBullets i) {
-		super(i);
-	}
-	public void move() {
-		x += velx;
-		y += vely;
+	public Bullet(Vector poss, Vector vell, Image i) throws SlickException{
+		pos = poss;
+		vel = vell;
+		img = i;
 	}
 	
 }
