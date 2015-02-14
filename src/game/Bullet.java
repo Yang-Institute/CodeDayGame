@@ -20,6 +20,16 @@ public class Bullet {
 		
 	}
 	
+	public Bullet(int xx,int yy,int xxx,int yyy, Image i) throws SlickException{
+		
+		pos.x = xx;
+		pos.y = yy;
+		vel.x = xxx;
+		vel.y = yyy;
+		img = i;
+		
+	}
+	
 	public Bullet(Vector poss, Vector vell, Image i) throws SlickException{
 		pos = poss;
 		vel = vell;

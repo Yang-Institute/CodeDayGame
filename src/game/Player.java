@@ -23,7 +23,7 @@ public class Player {
 	}
 	
 	public Bullet shoot() throws SlickException{
-		return new Bullet(pos,bvel,bulletImg);
+		return new Bullet(pos.x + 24, pos.y + 5,bvel.x,bvel.y,bulletImg);
 		
 	}
 	

@@ -28,6 +28,8 @@ public class Game extends BasicGame {
 	public static final double VERSION = 0.01;
 
 	Player player;
+	
+	private Command shoot = new BasicCommand("shoot");
 
 	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
@@ -37,7 +39,7 @@ public class Game extends BasicGame {
 
 	@Override
 	public void init(GameContainer gc) throws SlickException {
-		player = new Player(400, 320, "img/psprite1.png", "img/bullet.png");
+		player = new Player(400, 320, "img/psprite1.png", "img/bullet2.png");
 
 	}
 
@@ -83,7 +85,7 @@ public class Game extends BasicGame {
 		player.img.draw(player.pos.x, player.pos.y);
 		
 		for (Bullet b : bullets) {
-						b.pos.x += b.vel.x;
+			b.pos.x += b.vel.x;
 			b.pos.y += b.vel.y;
 			b.img.draw(b.pos.x, b.pos.y);
 
