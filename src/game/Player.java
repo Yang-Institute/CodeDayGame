@@ -9,7 +9,7 @@ public class Player {
 	public int health;
 	public Image img;
 	public Image bulletImg;
-	public Vector bvel = new Vector(0,-1);
+	public Vector bvel = new Vector(0,0);
 	
 	public Player(int xx, int yy, String i, String b) throws SlickException{
 		

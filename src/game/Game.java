@@ -40,7 +40,7 @@ public class Game extends BasicGame {
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		player = new Player(400, 320, "img/psprite1.png", "img/bullet2.png");
-
+	
 	}
 
 	@Override
@@ -71,9 +71,13 @@ public class Game extends BasicGame {
 
 		}
 
-		for (Bullet b : bullets) {
-			if (Math.abs(player.pos.x - b.pos.x) <= 8 && Math.abs(player.pos.y - b.pos.y) <= 8) {
+		for (int j = 0; j < bullets.size(); j++) {
+			Bullet b = bullets.get(j);
+			if (Math.abs(player.pos.x + 25 - b.pos.x) <= 8
+					&& Math.abs(player.pos.y + 22 - b.pos.y) <= 15) {
 				player.health -= 10;
+				bullets.remove(j);
+				j--;
 			}
 		}
 	}
