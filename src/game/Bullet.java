@@ -5,20 +5,22 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.particles.Particle;
 import org.newdawn.slick.particles.ParticleSystem;
 
-public class Bullet extends Particle{
+public class Bullet extends Particle {
 //	private int damage;
 
 	protected float velx;
 	protected float vely;
 	protected float x;
 	protected float y;
+	protected Image image;
 	
-	public Bullet(int xPlace, int yPlace) {
+	public Bullet(int xPlace, int yPlace) throws SlickException{
 		super(new ExistingBullets());
 		velx = 0;
 		vely = 15;
 		x = xPlace;
 		y = yPlace;
+		image = new Image("img/bullet.png");
 	}
 	
 	public Bullet(ExistingBullets i) {
