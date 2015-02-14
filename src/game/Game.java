@@ -19,8 +19,8 @@ import org.newdawn.slick.command.MouseButtonControl;
 
 public class Game extends BasicGame
 {
-	public static final int WIDTH   = 640;
-    public static final int HEIGHT  = 480;
+	public static final int WIDTH   = 500;
+    public static final int HEIGHT  = 540;
     public static final int FPS     = 60;
     public static final double VERSION = 0.01;
 	
@@ -41,22 +41,51 @@ public class Game extends BasicGame
 	public void update(GameContainer gc, int i) throws SlickException {
 		
 		Input input = gc.getInput();
-        if (input.isKeyDown(Input.KEY_UP))
-        {
-        	player.ypos -= 1;
+		if(input.isKeyDown(Input.KEY_UP) && input.isKeyDown(Input.KEY_LEFT)){
+	        	
+			player.ypos -= 1;
+	        player.xpos -= 1;
+	        	
+	    }
+	    else if(input.isKeyDown(Input.KEY_UP) && input.isKeyDown(Input.KEY_RIGHT)){
+	        	
+	        player.ypos -= 1;
+	        player.xpos += 1;
+	        	
+	    }
+	    else if(input.isKeyDown(Input.KEY_DOWN) && input.isKeyDown(Input.KEY_LEFT)){
+	        	
+	        player.ypos += 1;
+	        player.xpos -= 1;
+	        	
+	    }
+	    else if(input.isKeyDown(Input.KEY_DOWN) && input.isKeyDown(Input.KEY_RIGHT)){
+	        	
+	        player.ypos += 1;
+	        player.xpos += 1;
+	        	
+	    }
+	    else if (input.isKeyDown(Input.KEY_UP)){
+        	
+        	player.ypos -= 2;
+        	
         }
-        else if (input.isKeyDown(Input.KEY_DOWN))
-        {
-            player.ypos += 1;
+        else if (input.isKeyDown(Input.KEY_DOWN)){
+        	
+            player.ypos += 2;
+            
         }
-        else if (input.isKeyDown(Input.KEY_LEFT))
-        {
-            player.xpos -= 1;
+        else if (input.isKeyDown(Input.KEY_LEFT)){
+        	
+            player.xpos -= 2;
+            
         }
-        else if (input.isKeyDown(Input.KEY_RIGHT))
-        {
-            player.xpos += 1;
+        else if (input.isKeyDown(Input.KEY_RIGHT)){
+        	
+            player.xpos += 2;
+            
         }
+      
 		
 		
 	}
