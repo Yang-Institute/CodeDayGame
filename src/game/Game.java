@@ -70,15 +70,15 @@ public class Game extends BasicGame {
 
 		if (input.isKeyDown(Input.KEY_W)) {
 
-			player.pos.x += (int) 3 * Math.cos(Math.toRadians(player.angle));
-			player.pos.y -= (int) 3 * Math.sin(Math.toRadians(player.angle));
+			player.pos.x += Math.round(3 * Math.cos(Math.toRadians(player.angle)));
+			player.pos.y -= Math.round(3 * Math.sin(Math.toRadians(player.angle)));
 			System.out.println("Key W" + player.pos);
 
 		}
 		if (input.isKeyDown(Input.KEY_S)) {
 
-			player.pos.x -= (int) 3 * Math.cos(Math.toRadians(player.angle));
-			player.pos.y += (int) 3 * Math.sin(Math.toRadians(player.angle));
+			player.pos.x -= Math.round(3 * Math.cos(Math.toRadians(player.angle)));
+			player.pos.y += Math.round(3 * Math.sin(Math.toRadians(player.angle)));
 			System.out.println("Key S" + player.pos);
 
 		}
