@@ -187,10 +187,11 @@ public class Game extends BasicGame {
 					if (e.health <= 0){
 						enemies.remove(tt);
 						tt--;
-						break;
 					}	
 					bullets.remove(a);
 					a--;
+					continue;
+
 				}
 			}
 		}
