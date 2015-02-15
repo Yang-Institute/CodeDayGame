@@ -1,5 +1,7 @@
 package game;
 
+
+
 public class Vector {
 	
 	public int x;
@@ -16,4 +18,9 @@ public class Vector {
 		return "(" + x + ", " + y + ")";
 	}
 	
+	//public static Vector angleToVector(int a){
+		
+		
+		
+	//}
 }

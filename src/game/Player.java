@@ -6,6 +6,7 @@ import org.newdawn.slick.SlickException;
 public class Player {
 	
 	public Vector pos = new Vector(0,0);
+	public int angle;
 	public int health;
 	public Image imgTop;
 	public Image imgBottom;
@@ -18,6 +19,7 @@ public class Player {
 		imgTop = new Image(t);
 		imgBottom = new Image(b);
 		health = 100;
+		angle = 90;
 		
 		
 	}

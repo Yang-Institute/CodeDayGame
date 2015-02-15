@@ -27,6 +27,7 @@ public class Game extends BasicGame {
 	public static final int FPS = 60;
 	public static final double VERSION = 0.01;
 	public static int deg = 90;
+	//public static int tankdeg = 90;
 	
 	Player player;
 
@@ -69,22 +70,30 @@ public class Game extends BasicGame {
 
 		if (input.isKeyDown(Input.KEY_W)) {
 
-			player.pos.y -= 2;
+			player.pos.x -= (int) 2 * Math.cos(player.angle);
+			player.pos.y -= (int) 2 * Math.sin(player.angle);
 
 		}
 		if (input.isKeyDown(Input.KEY_S)) {
 
-			player.pos.y += 2;
+			player.pos.x += (int)2 * Math.cos(player.angle);
+			player.pos.y += (int)2 * Math.sin(player.angle);
 
 		}
 		if (input.isKeyDown(Input.KEY_A)) {
 
-			player.pos.x -= 2;
+			player.angle += 4;
+			player.imgBottom.rotate(-4);
+			if (player.angle > 360)
+				player.angle -= 360;
 
 		}
 		if (input.isKeyDown(Input.KEY_D)) {
 
-			player.pos.x += 2;
+			player.angle -= 4;
+			player.imgBottom.rotate(4);
+			if (player.angle < 0)
+				player.angle += 360;
 
 		}
 
@@ -120,11 +129,15 @@ public class Game extends BasicGame {
 		
 		player.imgTop.rotate(deg - degrees);
 		
+		
 		deg = degrees;
-
+		
+		g.drawString("" + player.angle, 200, 520);
+		g.drawString("" + 2 * Math.cos(player.angle), 420, 520);
+		
 		g.drawString("Health: " + player.health, 0, 520);
 
-		
+			
 		player.imgBottom.draw(player.pos.x, player.pos.y);
 		player.imgTop.draw(player.pos.x, player.pos.y);
 
