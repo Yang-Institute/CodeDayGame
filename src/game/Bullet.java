@@ -7,6 +7,8 @@ public class Bullet {
 	
 	public Vector pos = new Vector(0,0);
 	public Vector vel = new Vector(0,0);
+	
+	public int bounce = 100;
 	public Image img;
 	
 	
