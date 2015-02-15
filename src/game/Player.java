@@ -21,11 +21,11 @@ public class Player {
 		
 		
 	}
-	
+	/* Depreciated
 	public Bullet shoot() throws SlickException{
 		return new Bullet(pos.x + 24, pos.y,bvel.x,bvel.y,bulletImg);
 		
 	}
-	
+	*/
 
 }

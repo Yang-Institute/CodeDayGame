@@ -21,7 +21,7 @@ import org.newdawn.slick.command.MouseButtonControl;
 import org.newdawn.slick.particles.ParticleSystem;
 import org.omg.CORBA.BAD_POLICY_VALUE;
 
-public class Game extends BasicGame implements InputProviderListener  {
+public class Game extends BasicGame {
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 540;
 	public static final int FPS = 60;
@@ -29,9 +29,6 @@ public class Game extends BasicGame implements InputProviderListener  {
 
 	Player player;
 	
-	private Command shoot = new BasicCommand("shoot");
-	
-	private InputProvider provider;	
 	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
 	public Game(String gamename) {
@@ -42,37 +39,23 @@ public class Game extends BasicGame implements InputProviderListener  {
 	public void init(GameContainer gc) throws SlickException {
 		player = new Player(400, 320, "img/psprite1.png", "img/bullet2.png");
 		
-		provider = new InputProvider(gc.getInput());
-        provider.addListener(this);
-        provider.bindCommand(new MouseButtonControl(0), shoot);
-	
 	}
 	
-	@Override
-	public void controlPressed(Command c) {
-		
-		if (c.equals(shoot)){
-			try {
-				bullets.add(new Bullet(player.pos.x + 24, player.pos.y
-											velxfiller, velyfiller, "img/Bullet2.png"));
-			} catch (SlickException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-	}
 
-	@Override
-	public void controlReleased(Command c) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void update(GameContainer gc, int i) throws SlickException {
 
 		Input input = gc.getInput();
+		if (input.isKeyPressed(Input.MOUSE_LEFT_BUTTON)){
+			try{
+				bullets.add(new Bullet(player.pos.x + 24, player.pos.y,
+													xvelfiller, yvelfiller, "img/bullet2.png"));
+			}
+			catch (SlickException e){
+				e.printStackTrace();
+			}
+		}
 		
 		if (input.isKeyDown(Input.KEY_W)) {
 
