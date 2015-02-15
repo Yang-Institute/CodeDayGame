@@ -25,7 +25,7 @@ public class Game extends BasicGame {
 	public static final int WIDTH = 1000;
 	public static final int HEIGHT = 600;
 	public static final int FPS = 60;
-	public static final double VERSION = 0.3;
+	public static final double VERSION = 0.74;
 
 	public static int deg = 90;
 	
@@ -335,14 +335,15 @@ public class Game extends BasicGame {
 			g.drawString("Game Over", 500, 400);
 			enemies.clear();
 			bullets.clear();
+			
 		}
-		// g.drawString("Hello World", 50, 50);
+		
 	}
 
 	public static void main(String[] args) {
 		try {
 			AppGameContainer appgc;
-			appgc = new AppGameContainer(new Game("Game v." + VERSION));
+			appgc = new AppGameContainer(new Game("spaceTanksInvaders v." + VERSION));
 			appgc.setDisplayMode(WIDTH, HEIGHT, false);
 			appgc.setTargetFrameRate(FPS);
 			appgc.setShowFPS(true);
