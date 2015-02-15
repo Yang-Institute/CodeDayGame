@@ -70,14 +70,16 @@ public class Game extends BasicGame {
 
 		if (input.isKeyDown(Input.KEY_W)) {
 
-			player.pos.x -= (int) 2 * Math.cos(player.angle);
-			player.pos.y -= (int) 2 * Math.sin(player.angle);
+			player.pos.x += (int) 3 * Math.cos(Math.toRadians(player.angle));
+			player.pos.y -= (int) 3 * Math.sin(Math.toRadians(player.angle));
+			System.out.println("Key W" + player.pos);
 
 		}
 		if (input.isKeyDown(Input.KEY_S)) {
 
-			player.pos.x += (int)2 * Math.cos(player.angle);
-			player.pos.y += (int)2 * Math.sin(player.angle);
+			player.pos.x -= (int) 3 * Math.cos(Math.toRadians(player.angle));
+			player.pos.y += (int) 3 * Math.sin(Math.toRadians(player.angle));
+			System.out.println("Key S" + player.pos);
 
 		}
 		if (input.isKeyDown(Input.KEY_A)) {
@@ -133,7 +135,8 @@ public class Game extends BasicGame {
 		deg = degrees;
 		
 		g.drawString("" + player.angle, 200, 520);
-		g.drawString("" + 2 * Math.cos(player.angle), 420, 520);
+		g.drawString("" + (int) 3 * Math.cos(Math.toRadians(player.angle)), 300, 100);
+		g.drawString("" + (int) 3 * Math.sin(Math.toRadians(player.angle)), 300, 150);
 		
 		g.drawString("Health: " + player.health, 0, 520);
 
