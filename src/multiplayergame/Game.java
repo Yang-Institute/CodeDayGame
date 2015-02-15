@@ -1,3 +1,4 @@
+
 package multiplayergame;
 
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class Game extends BasicGame {
 	// public static int tankdeg = 90;
 
 	Player player;
+	Player otherPlayer;
 
 	public ArrayList<NonPlayer> enemies = new ArrayList<NonPlayer>();
 	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
@@ -48,7 +50,8 @@ public class Game extends BasicGame {
 
 	@Override
 	public void update(GameContainer gc, int i) throws SlickException {
-
+		boolean moved = false;
+		boolean hit = false;
 		Input input = gc.getInput();
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 
@@ -82,7 +85,7 @@ public class Game extends BasicGame {
 			} catch (SlickException e) {
 				e.printStackTrace();
 			}
-
+			moved = true;
 		}
 
 		if (input.isKeyDown(Input.KEY_W)) {
@@ -91,6 +94,7 @@ public class Game extends BasicGame {
 					.toRadians(player.angle)));
 			player.pos.y -= Math.round(3 * Math.sin(Math
 					.toRadians(player.angle)));
+			moved = true;
 
 		}
 		if (input.isKeyDown(Input.KEY_S)) {
@@ -99,6 +103,8 @@ public class Game extends BasicGame {
 					.toRadians(player.angle)));
 			player.pos.y += Math.round(3 * Math.sin(Math
 					.toRadians(player.angle)));
+			moved = true;
+
 
 		}
 		if (input.isKeyDown(Input.KEY_A)) {
@@ -107,6 +113,8 @@ public class Game extends BasicGame {
 			player.imgBottom.rotate(-4);
 			if (player.angle > 360)
 				player.angle -= 360;
+			moved = true;
+
 
 		}
 		if (input.isKeyDown(Input.KEY_D)) {
@@ -115,6 +123,8 @@ public class Game extends BasicGame {
 			player.imgBottom.rotate(4);
 			if (player.angle < 0)
 				player.angle += 360;
+			moved = true;
+
 
 		}
 
@@ -124,13 +134,14 @@ public class Game extends BasicGame {
 			if (Math.abs(player.pos.x + 25 - b.pos.x) <= 8
 					&& Math.abs(player.pos.y + 22 - b.pos.y) <= 15) {
 				player.health -= 10;
+				hit = true;
 				bullets.remove(j);
 				j--;
 			}
 		}
 
-		for (int r = 0; r < bullets.size(); r++) { // Bullets collison with
-													// player
+		for (int r = 0; r < bullets.size(); r++) { 
+													
 			Bullet b = bullets.get(r);
 			if (b.pos.x <= 0 || b.pos.x >= WIDTH) {
 				b.vel.x = -b.vel.x;
@@ -208,6 +219,9 @@ public class Game extends BasicGame {
 
 		player.imgBottom.draw(player.pos.x, player.pos.y);
 		player.imgTop.draw(player.pos.x, player.pos.y);
+		
+		otherPlayer.imgBottom.draw(otherPlayer.pos.x, otherPlayer.pos.y);
+		otherPlayer.imgTop.draw(otherPlayer.pos.x, otherPlayer.pos.y);
 
 		for (Bullet b : bullets) {
 			b.pos.x += b.vel.x;
@@ -216,10 +230,9 @@ public class Game extends BasicGame {
 
 		}
 
-		for (NonPlayer t : enemies) {
-			t.imgBottom.draw(t.pos.x, t.pos.y);
-			t.imgTop.draw(t.pos.x, t.pos.y);
-		}
+		
+			
+		
 		// g.drawString("Hello World", 50, 50);
 	}
 
@@ -238,3 +251,4 @@ public class Game extends BasicGame {
 	}
 
 }
+
