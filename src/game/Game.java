@@ -210,7 +210,7 @@ public class Game extends BasicGame {
 	public void artifiacalizedMANNNGGGG(NonPlayer enemy) {
 
 		if (!isInBulletPath(enemy)) {
-			if (Math.random() * (60/Math.log(level * 3)) <= 1) {
+			if (Math.random() * (60 / Math.log(level * 3)) <= 1) {
 				enemyShoot(enemy);
 			}
 		}
@@ -254,11 +254,14 @@ public class Game extends BasicGame {
 
 		for (Bullet b : bullets) {
 
-			int bulletX = b.pos.x + b.vel.x;
-			int bulletY = b.pos.y + b.vel.y;
-			if (Math.abs(bulletX - enemy.pos.x) < 25
-					&& Math.abs(bulletY - enemy.pos.y) < 22) {
-				return true;
+			for (int i = 1; i < 15; i++) {
+				int bulletX = b.pos.x + i * b.vel.x;
+
+				int bulletY = b.pos.y + b.vel.y;
+				if (Math.abs(bulletX - enemy.pos.x) < 60
+						&& Math.abs(bulletY - enemy.pos.y) < 22) {
+					return true;
+				}
 			}
 		}
 		return false;
