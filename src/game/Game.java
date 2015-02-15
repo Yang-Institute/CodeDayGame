@@ -96,20 +96,20 @@ public class Game extends BasicGame {
 			for (NonPlayer e : enemies) {
 				if (!(Math.abs(tempX - e.pos.x) < 20 && Math.abs(tempY
 						- e.pos.y) < 25)) {
-					if (tempX > -20 && tempX < WIDTH - 42) {
+					if (tempX >= -20 && tempX <= WIDTH - 42) {
 
 						player.pos.x = tempX;
 					}
-					if (tempY > -20 && tempY < HEIGHT - 42) {
+					if (tempY >= -20 && tempY <= HEIGHT - 42) {
 						player.pos.y = tempY;
 					}
 
 				} else if (Math.abs(player.pos.x - e.pos.x) < 20) {
-					if (tempX > -20 && tempX < WIDTH - 42) {
+					if (tempX >= -20 && tempX <= WIDTH - 42) {
 						player.pos.x = tempX;
 					}
 				} else if (Math.abs(player.pos.y - e.pos.y) < 25) {
-					if (tempY > -20 && tempY < WIDTH - 42) {
+					if (tempY >= -20 && tempY <= WIDTH - 42) {
 						player.pos.y = tempY;
 					}
 				}
