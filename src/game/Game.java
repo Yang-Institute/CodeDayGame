@@ -75,9 +75,9 @@ public class Game extends BasicGame {
 					+ Math.pow(mouseY - bulletY, 2));
 
 			try {
-				bullets.add(new Bullet(bulletX, bulletY,
-						(int) Math.round((mod * (mouseX - bulletX))),
-						(int) Math.round((mod * (mouseY - bulletY))), "img/bullet2.png"));
+				bullets.add(new Bullet(bulletX, bulletY, (int) Math
+						.round((mod * (mouseX - bulletX))), (int) Math
+						.round((mod * (mouseY - bulletY))), "img/bullet2.png"));
 
 			} catch (SlickException e) {
 				e.printStackTrace();
@@ -86,11 +86,34 @@ public class Game extends BasicGame {
 		}
 
 		if (input.isKeyDown(Input.KEY_W)) {
+			int tempX = player.pos.x
+					+ (int) Math.round(3 * Math.cos(Math
+							.toRadians(player.angle)));
 
-			player.pos.x += Math.round(3 * Math.cos(Math
-					.toRadians(player.angle)));
-			player.pos.y -= Math.round(3 * Math.sin(Math
-					.toRadians(player.angle)));
+			int tempY = player.pos.y
+					- (int) Math.round(3 * Math.sin(Math
+							.toRadians(player.angle)));
+			for (NonPlayer e : enemies) {
+				if (!(Math.abs(tempX - e.pos.x) < 20 && Math.abs(tempY
+						- e.pos.y) < 25)) {
+					if (tempX > -20 && tempX < WIDTH - 42) {
+
+						player.pos.x = tempX;
+					}
+					if (tempY > -20 && tempY < HEIGHT - 42) {
+						player.pos.y = tempY;
+					}
+
+				} else if (Math.abs(player.pos.x - e.pos.x) < 20) {
+					if (tempX > -20 && tempX < WIDTH - 42) {
+						player.pos.x = tempX;
+					}
+				} else if (Math.abs(player.pos.y - e.pos.y) < 25) {
+					if (tempY > -20 && tempY < WIDTH - 42) {
+						player.pos.y = tempY;
+					}
+				}
+			}
 
 		}
 		if (input.isKeyDown(Input.KEY_S)) {
