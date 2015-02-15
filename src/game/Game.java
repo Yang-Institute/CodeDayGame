@@ -49,10 +49,25 @@ public class Game extends BasicGame {
 		Input input = gc.getInput();
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 
-			int bulletX = player.pos.x + 24;
-			int bulletY = player.pos.y;
+			int bulletX = player.pos.x + 25;
+			int bulletY = player.pos.y + 22;
+			int tankX = player.pos.x + 25;
+			int tankY = player.pos.y + 22;
 			int mouseX = input.getMouseX();
 			int mouseY = input.getMouseY();
+			double radians = 0;
+			double distance = (int) Math.sqrt(Math.pow(mouseX - tankX, 2)
+					+ Math.pow(mouseY - tankY, 2));
+			
+			if (mouseX > tankX) {
+				radians = Math.asin((tankY - mouseY) / distance);
+			} else {
+				radians = 3.14 / 2 + Math.acos((tankY - mouseY) / distance);
+			}
+
+			bulletX = bulletX + (int) Math.round(25 * Math.cos(radians));
+			bulletY = bulletY - (int) Math.round(22 * Math.sin(radians));
+			
 
 			double mod = 10 / Math.sqrt(Math.pow(mouseX - bulletX, 2)
 					+ Math.pow(mouseY - bulletY, 2));
@@ -133,10 +148,6 @@ public class Game extends BasicGame {
 		
 		
 		deg = degrees;
-		
-		g.drawString("" + player.angle, 200, 520);
-		g.drawString("" + (int) 3 * Math.cos(Math.toRadians(player.angle)), 300, 100);
-		g.drawString("" + (int) 3 * Math.sin(Math.toRadians(player.angle)), 300, 150);
 		
 		g.drawString("Health: " + player.health, 0, 520);
 
