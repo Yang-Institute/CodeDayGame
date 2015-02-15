@@ -22,7 +22,10 @@ import org.newdawn.slick.command.MouseButtonControl;
 import org.newdawn.slick.particles.ParticleSystem;
 import org.omg.CORBA.BAD_POLICY_VALUE;
 
-public class Game extends BasicGame {
+import java.net.*;
+import java.io.*;
+
+public class GameServer extends BasicGame {
 	public static final int WIDTH = 1000;
 	public static final int HEIGHT = 600;
 	public static final int FPS = 60;
@@ -34,12 +37,18 @@ public class Game extends BasicGame {
 
 	Player player;
 	Player otherPlayer;
-
+	
+	static ServerSocket Server = null;
+    static String line;
+    static DataInputStream is;
+    static PrintStream os;
+    static Socket clientSocket = null;
+	
 	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	public ArrayList<Bullet> otherBullets = new ArrayList<Bullet>();
 	
 
-	public Game(String gamename) {
+	public GameServer(String gamename) {
 		super(gamename);
 	}
 
@@ -163,7 +172,16 @@ public class Game extends BasicGame {
 			}
 
 		}
-
+		
+		if (moved){
+			try {
+				os = new PrintStream(clientSocket.getOutputStream());
+				os.println("");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 
 	
@@ -198,6 +216,13 @@ public class Game extends BasicGame {
 		player.imgBottom.draw(player.pos.x, player.pos.y);
 		player.imgTop.draw(player.pos.x, player.pos.y);
 		
+		try {
+			is = new DataInputStream(clientSocket.getInputStream());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		otherPlayer.imgBottom.draw(otherPlayer.pos.x, otherPlayer.pos.y);
 		otherPlayer.imgTop.draw(otherPlayer.pos.x, otherPlayer.pos.y);
 
@@ -215,16 +240,36 @@ public class Game extends BasicGame {
 	}
 
 	public static void main(String[] args) {
+		
+		try {
+	           Server = new ServerSocket(8888);
+	        }
+	        catch (IOException e) {
+	           System.out.println(e);
+	        } 
+		
+		try {
+	           clientSocket = Server.accept();
+	           
+	           
+	// As long as we receive data, echo that data back to the client.
+	           
+	        }   
+	    catch (IOException e) {
+	           System.out.println(e);
+	        }
+	    
+		
 		try {
 			AppGameContainer appgc;
-			appgc = new AppGameContainer(new Game("Game v." + VERSION));
+			appgc = new AppGameContainer(new GameServer("Game v." + VERSION));
 			appgc.setDisplayMode(WIDTH, HEIGHT, false);
 			appgc.setTargetFrameRate(FPS);
 			appgc.setShowFPS(true);
 			appgc.setAlwaysRender(true);
 			appgc.start();
 		} catch (SlickException ex) {
-			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 

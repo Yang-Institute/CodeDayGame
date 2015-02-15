@@ -22,7 +22,10 @@ import org.newdawn.slick.command.MouseButtonControl;
 import org.newdawn.slick.particles.ParticleSystem;
 import org.omg.CORBA.BAD_POLICY_VALUE;
 
-public class Game extends BasicGame {
+import java.net.*;
+import java.io.*;
+
+public class GameClient extends BasicGame {
 	public static final int WIDTH = 1000;
 	public static final int HEIGHT = 600;
 	public static final int FPS = 60;
@@ -39,7 +42,7 @@ public class Game extends BasicGame {
 	public ArrayList<Bullet> otherBullets = new ArrayList<Bullet>();
 	
 
-	public Game(String gamename) {
+	public GameClient(String gamename) {
 		super(gamename);
 	}
 
@@ -217,14 +220,14 @@ public class Game extends BasicGame {
 	public static void main(String[] args) {
 		try {
 			AppGameContainer appgc;
-			appgc = new AppGameContainer(new Game("Game v." + VERSION));
+			appgc = new AppGameContainer(new GameClient("Game v." + VERSION));
 			appgc.setDisplayMode(WIDTH, HEIGHT, false);
 			appgc.setTargetFrameRate(FPS);
 			appgc.setShowFPS(true);
 			appgc.setAlwaysRender(true);
 			appgc.start();
 		} catch (SlickException ex) {
-			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(GameClient.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 
