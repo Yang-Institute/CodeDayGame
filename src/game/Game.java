@@ -48,9 +48,17 @@ public class Game extends BasicGame {
 
 		Input input = gc.getInput();
 		if (input.isKeyPressed(Input.MOUSE_LEFT_BUTTON)){
+			
+			int bulletX = player.pos.x + 24;
+			int bulletY = player.pos.y;
+			int mouseX = input.getMouseX();
+			int mouseY = input.getMouseY();
+			double mod = 10 / Math.sqrt(Math.pow(mouseX - bulletX, 2)
+					+ Math.pow(mouseY, 2));
 			try{
-				bullets.add(new Bullet(player.pos.x + 24, player.pos.y,
-													xvelfiller, yvelfiller, "img/bullet2.png"));
+				bullets.add(new Bullet(bulletX, bulletY, (int) mod * Math.abs(mouseX-bulletX),
+						(int) mod * Math.abs(mouseY-bulletY), "img/bullet2.png"));
+				System.out.println(bullets.get(bullets.size()-1).vel.toString());
 			}
 			catch (SlickException e){
 				e.printStackTrace();
