@@ -76,8 +76,8 @@ public class Game extends BasicGame {
 
 			try {
 				bullets.add(new Bullet(bulletX, bulletY,
-						(int) (mod * (mouseX - bulletX)),
-						(int) (mod * (mouseY - bulletY)), "img/bullet2.png"));
+						(int) Math.round((mod * (mouseX - bulletX))),
+						(int) Math.round((mod * (mouseY - bulletY))), "img/bullet2.png"));
 
 			} catch (SlickException e) {
 				e.printStackTrace();
