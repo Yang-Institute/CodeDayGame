@@ -38,7 +38,7 @@ public class Game extends BasicGame {
 
 	@Override
 	public void init(GameContainer gc) throws SlickException {
-		player = new Player(400, 320, "img/tank.png", "img/bullet2.png");
+		player = new Player(400, 320, "img/toptank.png", "img/bottank.png");
 
 	}
 
@@ -118,13 +118,15 @@ public class Game extends BasicGame {
 		}
 		int degrees = (int) (180 / 3.14 * radians);
 		
-		player.img.rotate(deg - degrees);
+		player.imgTop.rotate(deg - degrees);
 		
 		deg = degrees;
 
 		g.drawString("Health: " + player.health, 0, 520);
 
-		player.img.draw(player.pos.x, player.pos.y);
+		
+		player.imgBottom.draw(player.pos.x, player.pos.y);
+		player.imgTop.draw(player.pos.x, player.pos.y);
 
 		for (Bullet b : bullets) {
 			b.pos.x += b.vel.x;

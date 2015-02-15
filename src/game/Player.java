@@ -7,16 +7,16 @@ public class Player {
 	
 	public Vector pos = new Vector(0,0);
 	public int health;
-	public Image img;
-	public Image bulletImg;
-	public Vector bvel = new Vector(0,-10);
+	public Image imgTop;
+	public Image imgBottom;
+	//public Vector bvel = new Vector(0,-10);
 	
-	public Player(int xx, int yy, String i, String b) throws SlickException{
+	public Player(int xx, int yy, String t, String b) throws SlickException{
 		
 		pos.x = xx;
 		pos.y = yy;
-		img = new Image(i);
-		bulletImg = new Image(b);
+		imgTop = new Image(t);
+		imgBottom = new Image(b);
 		health = 100;
 		
 		
