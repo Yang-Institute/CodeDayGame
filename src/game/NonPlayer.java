@@ -10,6 +10,4 @@ public class NonPlayer extends Player{
 		angle = 90;
 	}
 	
-	
-	
 }

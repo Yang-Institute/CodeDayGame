@@ -201,6 +201,67 @@ public class Game extends BasicGame {
 			}
 			level++;
 		}
+
+		for (int j = 0; j < enemies.size(); j++) {
+			artifiacalizedMANNNGGGG(enemies.get(j));
+		}
+	}
+
+	public void artifiacalizedMANNNGGGG(NonPlayer enemy) {
+
+		if (!isInBulletPath(enemy)) {
+			if (Math.random() * (60/Math.log(level * 3)) <= 1) {
+				enemyShoot(enemy);
+			}
+		}
+
+	}
+
+	public void enemyShoot(NonPlayer enemy) {
+		int bulletX = enemy.pos.x + 25;
+		int bulletY = enemy.pos.y + 22;
+		int tankX = enemy.pos.x + 25;
+		int tankY = enemy.pos.y + 22;
+		int playerX = player.pos.x;
+		int playerY = player.pos.y;
+		double radians = 0;
+		double distance = (int) Math.sqrt(Math.pow(playerX - tankX, 2)
+				+ Math.pow(playerY - tankY, 2));
+
+		if (playerX > tankX) {
+			radians = Math.asin((tankY - playerY) / distance);
+		} else {
+			radians = 3.14 / 2 + Math.acos((tankY - playerY) / distance);
+		}
+
+		bulletX = bulletX + (int) Math.round(25 * Math.cos(radians));
+		bulletY = bulletY - (int) Math.round(22 * Math.sin(radians));
+
+		double mod = 10 / Math.sqrt(Math.pow(playerX - bulletX, 2)
+				+ Math.pow(playerX - bulletY, 2));
+
+		try {
+			bullets.add(new Bullet(bulletX, bulletY, (int) Math
+					.round((mod * (playerX - bulletX))), (int) Math
+					.round((mod * (playerX - bulletY))), "img/bullet2.png"));
+
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public boolean isInBulletPath(NonPlayer enemy) {
+
+		for (Bullet b : bullets) {
+
+			int bulletX = b.pos.x + b.vel.x;
+			int bulletY = b.pos.y + b.vel.y;
+			if (Math.abs(bulletX - enemy.pos.x) < 25
+					&& Math.abs(bulletY - enemy.pos.y) < 22) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
