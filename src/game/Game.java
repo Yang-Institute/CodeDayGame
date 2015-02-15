@@ -330,7 +330,12 @@ public class Game extends BasicGame {
 
 			tt.edeg = edegrees;
 		}
-	
+		
+		if (player.health <= 0){
+			g.drawString("Game Over", 500, 400);
+			enemies.clear();
+			bullets.clear();
+		}
 		// g.drawString("Hello World", 50, 50);
 	}
 
