@@ -28,6 +28,7 @@ public class Game extends BasicGame {
 	public static final double VERSION = 0.3;
 
 	public static int deg = 90;
+	
 	public static int level = 1;
 	// public static int tankdeg = 90;
 
@@ -152,8 +153,8 @@ public class Game extends BasicGame {
 			}
 		}
 
-		for (int r = 0; r < bullets.size(); r++) { // Bullets collison with
-													// player
+		for (int r = 0; r < bullets.size(); r++) {
+
 			Bullet b = bullets.get(r);
 			if (b.pos.x <= 0 || b.pos.x >= WIDTH) {
 				b.vel.x = -b.vel.x;
@@ -161,6 +162,7 @@ public class Game extends BasicGame {
 				if (b.bounce <= 0) {
 					bullets.remove(r);
 					r--;
+					continue;
 				}
 			}
 			if (b.pos.y <= 0 || b.pos.y >= HEIGHT) {
@@ -182,11 +184,13 @@ public class Game extends BasicGame {
 				if (Math.abs(e.pos.x + 25 - bb.pos.x) <= 8
 						&& Math.abs(e.pos.y + 22 - bb.pos.y) <= 15) {
 					e.health -= 10;
-					if (e.health <= 0)
+					if (e.health <= 0){
 						enemies.remove(tt);
-					tt--;
+						tt--;
+					}	
 					bullets.remove(a);
 					a--;
+					continue;
 
 				}
 			}
@@ -197,7 +201,7 @@ public class Game extends BasicGame {
 				enemies.add(new NonPlayer(
 						(int) (Math.random() * WIDTH - 50) + 25, (int) (Math
 								.random() * HEIGHT - 50) + 25, 20,
-						"img/toptank.png", "img/bottank.png"));
+						"img/toptankblue.png", "img/bottankblue.png"));
 			}
 			level++;
 		}
@@ -207,7 +211,8 @@ public class Game extends BasicGame {
 		}
 	}
 
-	public void artifiacalizedMANNNGGGG(NonPlayer enemy) {
+	public void artifiacalizedMANNNGGGG(NonPlayer enemy) { // are you fucking
+															// srs?
 
 		if (!isInBulletPath(enemy)) {
 			if (Math.random() * (60 / Math.log(level * 3)) <= 1) {
@@ -303,10 +308,29 @@ public class Game extends BasicGame {
 
 		}
 
-		for (NonPlayer t : enemies) {
-			t.imgBottom.draw(t.pos.x, t.pos.y);
-			t.imgTop.draw(t.pos.x, t.pos.y);
+		for (NonPlayer tt : enemies) {
+			tt.imgBottom.draw(tt.pos.x, tt.pos.y);
+			int etankX = tt.pos.x + 31;
+			int etankY = tt.pos.y + 31;
+			int emouseX = player.pos.x;
+			int emouseY = player.pos.y;
+			double edistance = (int) Math.sqrt(Math.pow(emouseX - etankX, 2)
+					+ Math.pow(emouseY - etankY, 2));
+
+			double eradians;
+			if (emouseX > etankX) {
+				eradians = Math.asin((etankY - emouseY) / edistance);
+			} else {
+				eradians = 3.14 / 2 + Math.acos((etankY - emouseY) / edistance);
+			}
+			int edegrees = (int) (180 / 3.14 * eradians);
+
+			tt.imgTop.rotate(tt.edeg - edegrees);
+			tt.imgTop.draw(tt.pos.x, tt.pos.y);
+
+			tt.edeg = edegrees;
 		}
+	
 		// g.drawString("Hello World", 50, 50);
 	}
 
