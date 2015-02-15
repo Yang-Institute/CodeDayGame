@@ -53,7 +53,8 @@ public class Game extends BasicGame implements InputProviderListener  {
 		
 		if (c.equals(shoot)){
 			try {
-				bullets.add(player.shoot());
+				bullets.add(new Bullet(player.pos.x + 24, player.pos.y
+											velxfiller, velyfiller, "img/Bullet2.png"));
 			} catch (SlickException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
